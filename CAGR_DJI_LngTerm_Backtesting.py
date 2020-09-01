@@ -15,9 +15,9 @@ def CAGR(DF):
     cagr_final = (df["cum_return"][-1])**(1/n) - 1
     return cagr_final, DF.index[0]
 
-
-"""" a test to check returns on any 5 year buy & hold strategy
-on Dow Jones since last 35 years i.e. on 10,958 combinations """
+######################################## BackTesting #########################################
+"""" backtesting the strategy to buy and hold Dow Jones Index for exactly 5 year in a window 
+ of past 35 years i.e. on 10,958 possible combinations """
 
 ticker_index = "^DJI"
 end_date = dt.date.today()
@@ -43,3 +43,4 @@ DJ_Index_CAGR = pd.DataFrame.from_dict(DJ_CAGR,orient='index',columns=['5-yr CAG
 fig, ax = plt.subplots(1, 1)
 table(ax, np.round(DJ_Index_CAGR.describe(), 2), loc='upper right', colWidths=[0.2])
 DJ_Index_CAGR.plot(ax=ax, ylim=(-10,50), legend=None, kind='line', use_index=True, grid=True, title='Dow Jones CAGR with 5 years holding period')
+ax.set(xlabel="Time Series", ylabel = "5-yr Return %")
